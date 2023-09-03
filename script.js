@@ -30,12 +30,25 @@ function validar(formula) {
         for (let j=0;j<letras.length;j++) {
             if (array[i] == letras[j]) {
                 if (!contains(premissas,letras[j])) {
-                    premissas.push(letras[j]);
+                    if (premissas.length>0 && premissas[premissas.length-1].length>1) {
+                        for (let k=0;k<premissas.length;k++) {
+                            if (premissas[k].length > 1) {
+                                premissas.splice(k,0, letras[j]);
+                                break;
+                            }
+                        }
+                    } else {
+                        premissas.push(letras[j]);
+                    }
                     console.log(premissas);
                 }
             }
             
         }
+    }
+    if (p_stack > 0) {
+        alert("Erro de sintaxe: Parenteses extra na fórmula");
+        return;
     }
 }
 
